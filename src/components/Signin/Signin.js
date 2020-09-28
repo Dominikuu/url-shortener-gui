@@ -1,4 +1,5 @@
 import React from 'react';
+import {get} from 'lodash';
 
 class Signin extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Signin extends React.Component {
   }
 
   onSubmitSignIn = () => {
-    fetch('http://localhost:3000/signin', {
+    fetch('http://'+ process.env.REACT_APP_BACKEND_URL + '/signin', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -27,10 +28,12 @@ class Signin extends React.Component {
       })
     })
       .then(response => response.json())
-      .then(user => {
-        if (user.id) {
-          this.props.loadUser(user)
+      .then(resp => {
+        if (get(resp,'user.id')) {
+          this.props.loadUser(resp.user)
           this.props.onRouteChange('home');
+          console.log(resp)
+          localStorage.setItem('access_token', resp.token)
         }
       })
   }
