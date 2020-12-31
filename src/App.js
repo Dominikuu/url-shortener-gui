@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import Particles from 'react-particles-js';
-import Clarifai from 'clarifai';
 import Navigation from './components/Navigation/Navigation';
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
 import Rank from './components/Rank/Rank';
 import './App.css';
 import TinyUrl from './components/TinyUrl/TinyUrl';
-
-//You must add your own API key here from Clarifai.
-const app = new Clarifai.App({
- apiKey: 'f94cb27cdf764667b1a6df753a48e973'
-});
 
 const particlesOptions = {
   "particles": {

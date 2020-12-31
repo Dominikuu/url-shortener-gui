@@ -1,5 +1,4 @@
 import React from 'react';
-import {get} from 'lodash';
 
 class TinyUrl extends React.Component {
   constructor(props) {
@@ -16,7 +15,7 @@ class TinyUrl extends React.Component {
         showLoading: false,
         exUrl:
           "https://www.amazon.com/Apple-iPhone-GSM-Unlocked-5-8/dp/B075QMZH2L",
-        exShortUrl: "http://local-dominique"
+        exShortUrl: process.env.REACT_APP_BACKEND_IP
     }
   }
 
@@ -50,13 +49,6 @@ class TinyUrl extends React.Component {
     })
       .then(response => response.json())
       .then(resp => {
-
-        // if (get(resp,'user.id')) {
-        //   this.props.loadUser(resp.user)
-        //   this.props.onRouteChange('home');
-        console.log(resp)
-        //   localStorage.setItem('access_token', resp.token)
-        // }
         this.setState({
             showLoading: false,
             showShortenUrl: true,
@@ -92,7 +84,7 @@ class TinyUrl extends React.Component {
                 <label className="db fw6 lh-copy f6" htmlFor="password">Base URL</label>
                 <input
                   placeholder="Paste your base URL.."
-                  value={this.state.exShortUrl}
+                  defaultValue={this.state.exShortUrl}
                   className="pa2 input-reset ba bg-white w-100"
                   type="text"
                   onChange={this.onInputBaseUrlChange}
